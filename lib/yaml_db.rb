@@ -78,10 +78,10 @@ __FILE__)
   end
 
 end
-Mysql.class_eval do
-  Time.class_eval do
-    def to_yaml
-      self.to_s
+class Mysql
+  class Time
+    def to_yaml opts = {}
+      self.to_s.to_yaml(opts)
     end
   end
 end

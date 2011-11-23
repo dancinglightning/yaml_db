@@ -16,7 +16,7 @@ module SerializationHelper
     end
 
     def dump_to_dir(dirname)
-      Dir.mkdir(dirname)
+      Dir.mkdir(dirname) unless File.exists? dirname
       tables = @dumper.tables
       tables.each do |table|
         io = File.new "#{dirname}/#{table}.#{@extension}", "w"
