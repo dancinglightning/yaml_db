@@ -23,7 +23,11 @@ module YamlDb
 
   module Utils
     def self.chunk_records(records)
-      yaml = [ records ].to_yaml
+      if [].respond_to? :ya2yaml
+        yaml = [ records ].ya2yaml
+      else
+        yaml = [ records ].to_yaml
+      end
       yaml.sub!(/---\s\n|---\n/, '')
       yaml.sub!('- - -', '  - -')
       yaml

@@ -14,6 +14,8 @@ Simply add to your Gemfile:
 
 All rake tasks will then be available to you.
 
+For better utf8 support you can add ya2yaml to your Gemfile and it will be used automatically for dumping.
+
 ## Usage
 
     rake db:data:dump   ->   Dump contents of Rails database to db/data.yml
