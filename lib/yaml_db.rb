@@ -78,3 +78,10 @@ __FILE__)
   end
 
 end
+module Mysql
+  class Time
+    def to_yaml
+      self.to_s
+    end
+  end
+end
