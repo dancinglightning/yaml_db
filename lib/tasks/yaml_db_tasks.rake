@@ -11,7 +11,7 @@ namespace :db do
     end
 
     def dump_dir(dir = "")
-      "#{Rails.root}/db#{dir}"
+      "#{Rails.root}/#{dir}"
     end
 
     desc "Dump contents of database to db/data.extension (defaults to yaml)"
@@ -22,9 +22,9 @@ namespace :db do
     end
 
     desc "Dump contents of database to curr_dir_name/tablename.extension (defaults to yaml)"
-    task :dump_dir , [:dir] => :environment do
+    task :dump_dir , [:dir] => :environment do |t , args|
       format_class = ENV['class'] || "YamlDb::Helper"
-      SerializationHelper::Base.new(format_class.constantize).dump_to_dir dump_dir("/#{dir}")
+      SerializationHelper::Base.new(format_class.constantize).dump_to_dir dump_dir("/#{args.dir}")
     end
 
     desc "Load contents of db/data.extension (defaults to yaml) into database"
@@ -35,9 +35,9 @@ namespace :db do
     end
 
     desc "Load contents of db/data_dir into database"
-    task :load_dir , [:dir]  => :environment do
+    task :load_dir , [:dir]  => :environment do |t , args|
       format_class = ENV['class'] || "YamlDb::Helper"
-      SerializationHelper::Base.new(format_class.constantize).load_from_dir dump_dir("/#{dir}")
+      SerializationHelper::Base.new(format_class.constantize).load_from_dir dump_dir("/#{args.dir}")
     end
   end
 end
