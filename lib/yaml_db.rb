@@ -78,8 +78,8 @@ __FILE__)
   end
 
 end
-module Mysql
-  class Time
+Mysql.class_eval do
+  Time.class_eval do
     def to_yaml
       self.to_s
     end
