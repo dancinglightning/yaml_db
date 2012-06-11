@@ -181,9 +181,7 @@ module SerializationHelper
       quoted_table_name = SerializationHelper::Utils.quote_table(table)
 
       (0..pages).to_a.each do |page|
-        sql = ActiveRecord::Base.connection.add_limit_offset!("SELECT * FROM #{quoted_table_name} ORDER BY #{id}",
-                                                              :limit => records_per_page, :offset => records_per_page * page
-        )
+        sql = "SELECT * FROM #{quoted_table_name} ORDER BY #{id} LIMIT #{records_per_page} OFFSET #{records_per_page * page}"
         records = ActiveRecord::Base.connection.select_all(sql)
         records = SerializationHelper::Utils.convert_booleans(records, boolean_columns)
         yield records
