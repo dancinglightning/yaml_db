@@ -23,9 +23,10 @@ For better utf8 support you can add ya2yaml to your Gemfile and it will be used 
 
 Further, there are tasks db:dump and db:load which do the entire database (the equivalent of running db:schema:dump followed by db:data:load).  Also, there are other tasks recently added that allow the export of the database contents to/from multiple files (each one named after the table being dumped or loaded).
 
-    rake db:data:dump_dir[dir_name]   ->   Dump contents of database to dir_name/tablename.extension (defaults to yaml)
-    rake db:data:load_dir[dir_name]   ->   Load contents of dir_name into database
+    rake db:data:dump_dir   ->   Dump contents of database to db/backup/tablename.extension (defaults to yaml)
+    rake db:data:load_dir   ->   Load contents of dir_name into database
 
+db/backup can be changed by environment variable DIR.
 In addition, we have plugins whereby you can export your database to/from various formats.  We only deal with yaml and csv right now, but you can easily write tools for your own formats (such as Excel or XML).  To use another format, just load setting the "class"  parameter to the class you are using.  This defaults to "YamlDb::Helper" which is a refactoring of the old yaml_db code.  We'll shorten this to use class nicknames in a little bit.
 
 ## Examples
