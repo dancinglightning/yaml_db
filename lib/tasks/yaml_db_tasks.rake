@@ -22,7 +22,7 @@ namespace :db do
     end
 
     desc "Dump contents of database to db/backup/tablename.extension (defaults to yaml)"
-    task :dump_dir do |t|
+    task :dump_dir => :environment do |t|
       dir = ENV['DIR'] || "db/backup"
       format_class = ENV['class'] || "YamlDb::Helper"
       SerializationHelper::Base.new(format_class.constantize).dump_to_dir dump_dir("/#{dir}")
@@ -36,7 +36,7 @@ namespace :db do
     end
 
     desc "Load contents of db/backup into database"
-    task :load_dir do |t|
+    task :load_dir => :environment do |t|
       dir = ENV['DIR'] || "db/backup"
       format_class = ENV['class'] || "YamlDb::Helper"
       SerializationHelper::Base.new(format_class.constantize).load_from_dir dump_dir("/#{dir}")
